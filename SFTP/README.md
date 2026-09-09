@@ -9,9 +9,9 @@
 
 For this project, I'm going to use two CentOS Stream 9 servers on Oracle VirtualBox. One is the SFTP server, and another one is the client.
 
-`/images/server1.png`
+![server1](images/server1.png)
 
-`images/server2.png`
+![server2](images/server2.png)
 
 ## Installing OpenSSH Server on Server One
 
@@ -29,7 +29,7 @@ Check if port `22` is listening:
 ss -tulnp | grep :22
 ```
 
-`images/status.png`
+![status](images/status.png)
 
 We can also check whether SFTP is working by connecting to localhost using the command:
 
@@ -76,7 +76,7 @@ sudo useradd -g sftpusers -s /sbin/nologin john
 sudo passwd john
 ```
 
-`images/groupanduser.png`
+![groupanduser](images/groupanduser.png)
 
 `-s /sbin/nologin` prevents the user from obtaining a normal interactive SSH shell. The user can still use SFTP.
 
@@ -101,7 +101,7 @@ sudo chown john:sftpusers /sftp/john/upload
 sudo chmod 755 /sftp/john/upload
 ```
 
-`images/ownerandpermission.png`
+![ownerandpermission](images/ownerandpermission.png)
 
 ## Configure SSH for SFTP-Only Access
 
@@ -236,7 +236,7 @@ Enter the directory:
 cd upload
 ```
 
-`images/sftp-client.png`
+![sftp-client](images/sftp-client.png)
 
 ## Upload a File
 
@@ -264,7 +264,7 @@ Upload the file:
 put test.txt
 ```
 
-`images/sftp-upload.png`
+![sftp-upload](images/sftp-upload.png)
 
 Verify on the server:
 
@@ -280,7 +280,7 @@ Download a file with a new name:
 get test.txt downloaded.txt
 ```
 
-`images/sftp-download.png`
+![sftp-download](images/sftp-download.png)
 
 ## Other Useful Commands
 
@@ -303,7 +303,7 @@ SSH shell access with `john` is blocked because of `ForceCommand internal-sftp`.
 ssh john@192.168.1.100
 ```
 
-`images/ssh-verification.png`
+![ssh-verification](images/ssh-verification.png)
 
 ## Add Multiple SFTP Users
 
