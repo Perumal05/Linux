@@ -9,7 +9,7 @@
 
 For this project, I'm going to use two CentOS Stream 9 servers on Oracle VirtualBox. One is the SFTP server, and another one is the client.
 
-`images/server1.png`
+`/images/server1.png`
 
 `images/server2.png`
 
