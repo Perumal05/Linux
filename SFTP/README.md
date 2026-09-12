@@ -383,3 +383,51 @@ Now each user has their own isolated area:
 └── vendor1
     └── upload
 ```
+
+## SSH Key Authentication
+
+For production SFTP, SSH keys are generally preferable to passwords.
+
+On the client, generate a key specific to the user:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/john_ed25519
+```
+
+You'll get a private key, which must remain secret, and a public key, which can be installed on the server.
+
+![sshkey-output](images/sshkey-output.png)
+
+On the SFTP server, we have to create the following directories for the user manually, since we restricted the user to SFTP access only:
+
+```bash
+mkdir -p /home/john/.ssh
+```
+
+Set ownership and permissions:
+
+```bash
+chown -R john:sftpusers /home/john/.ssh
+chmod 700 /home/john/.ssh
+chmod 600 /home/john/.ssh/authorized_keys
+```
+
+Copy the SFTP user's public key to the SFTP server, if the user has SSH access:
+
+```bash
+ssh-copy-id -i ~/.ssh/john_ed25519.pub john@192.168.1.11
+```
+
+Since we restricted our user to SFTP only, we have to manually put the public key into:
+
+```bash
+vi /home/john/.ssh/authorized_keys
+```
+
+From the client, let's test key-based SFTP:
+
+```bash
+sftp -i ~/.ssh/john_ed25519 john@192.168.1.11
+```
+
+![sftp-verification-with-sshkey](images/sftp-verification-with-sshkey.png)
